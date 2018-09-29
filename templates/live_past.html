@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/jquery.countdown.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>About Works</h2>
+            <span class="breadcrumbs"><a href="index.html"><i class="fa fa-home home_1"></i></a> / <a href="about.html"
+                                                                                                      class="home_desc">About</a> / <span>About_Work</span></span>
+        </div>
+    </div>
+    <div class="about_bottom">
+        <div class="container">
+            <div id="column" class="sub_col sub_col1" style="height: 65px;">
+                <div class="text-inner"><p>&nbsp;&nbsp;&nbsp;&nbsp;03</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Who we are</p>
+                </div>
+            </div>
+            <div class="col-md-3 column-1">
+                <div class="list-group">
+                    <a href="{% url 'live:live_preview' %}" class="list-group-item active">最近直播</a>
+                    <a href="{% url 'live:live_past' %}" class="list-group-item ">以往直播</a>
+                </div>
+            </div>
+            <div class="col-md-9 column-2">
+                <h4>Coming Soon............</h4>
+                <div class="timer_grid">
+                    <ul id="countdown">
+                    </ul>
+                    <ul class="navigation">
+                        <li>
+                            <p class="timeRefDays">DAYS</p>
+                        </li>
+                        <li>
+                            <p class="timeRefHours">HOURS</p>
+                        </li>
+                        <li>
+                            <p class="timeRefMinutes">MINUTES</p>
+                        </li>
+                        <li>
+                            <p class="timeRefSeconds">SECONDS</p>
+                        </li>
+                    </ul>
+                </div>
+                <section class="grid-posts">
+                    <ul class="timeline_work">
+                        {% for past in past_live %}
+                            <li class="entry-timeline clearfix">
+                                <div class="entry_number">
+                                    <div class="icon">
+                                        <i class="fa fa-calendar-o cal"></i>
+                                    </div>
+                                    <div class="work-box clearfix">
+                                        <span class="number">{{ past.live_time.year }}</span>
+                                        <div class="content-inner">
+                                            <div class="wcontent">
+                                                <div class="date">{{ past.live_time.month }}月{{ past.live_time.day }}日</div>
+                                                <div class="title">{{ past.title }}</div>
+                                                <div class="content_para">
+                                                    <p>
+                                                        {% autoescape off %}
+                                                            {{ past.content }}
+                                                        {% endautoescape %}
+                                                    </p>
+                                                </div>
+                                                <div class="row" style="margin-top: 50px;">
+                                                    <div class="col-md-12">
+                                                        <a href="{{ past.link }}" class="add_btn more_btn">录播地址</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'js/jquery.countdown.js' %}"></script>
+    <script>
+        $(function () {
+
+            var note = $('#note'),
+                ts = new Date(),
+                newYear = true;
+
+            if ((new Date()) > ts) {
+                // The new year is here! Count towards something else.
+                // Notice the *1000 at the end - time must be in milliseconds
+                ts = (new Date()).getTime();
+                newYear = false;
+            }
+
+            $('#countdown').countdown({
+                timestamp: ts,
+                callback: function (days, hours, minutes, seconds) {
+
+                    var message = "";
+
+                    message += days + " day" + (days == 1 ? '' : 's') + ", ";
+                    message += hours + " hour" + (hours == 1 ? '' : 's') + ", ";
+                    message += minutes + " minute" + (minutes == 1 ? '' : 's') + " and ";
+                    message += seconds + " second" + (seconds == 1 ? '' : 's') + " <br />";
+
+                    if (newYear) {
+                        message += "left until the new year!";
+                    }
+                    else {
+                        message += "left to 10 days from now!";
+                    }
+
+                    note.html(message);
+                }
+            });
+
+        });
+
+    </script>
+{% endblock %}
+
+

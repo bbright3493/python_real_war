@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>{{ article.title }}</h2>
+            <span class="breadcrumbs"><a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> / <a
+                    href="{% url 'article:article_list' article.category %}"
+                    class="home_desc">{{ article.category.name }}</a> / <span>{{ article.title }}</span></span>
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+            {#            <div class="col-md-3 article">#}
+            {#                <section class="slider_1">#}
+            {#                    <div class="flexslider">#}
+            {#                        <ul class="slides">#}
+            {#                            <li>#}
+            {#                                <div class="article_box">#}
+            {#                                    <div class="article_img">#}
+            {#                                        <img src="images/c13.jpg" class="img-responsive" alt=""/>#}
+            {#                                    </div>#}
+            {#                                    <h3>admin</h3>#}
+            {#                                    <p>Lorem ipsum dolor sit amet, mauris suspendisse viverra eleifend tortor tellus#}
+            {#                                        suscipit, tortor aliquet at nulla mus, dignissim neque, nulla neque. Ultrices#}
+            {#                                        proin mi urna nibh.</p>#}
+            {#                                    <div class="social-ul">#}
+            {#                                        <ul>#}
+            {#                                            <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-linkedin"><a href="#"><i class="fa fa-linkedin"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-youtube"><a href="#"><i#}
+            {#                                                    class="fa fa-youtube-play"></i></a></li>#}
+            {#                                        </ul>#}
+            {#                                    </div>#}
+            {#                                    <div class="clearfix"></div>#}
+            {#                                </div>#}
+            {#                            </li>#}
+            {#                            <li>#}
+            {#                                <div class="article_box">#}
+            {#                                    <div class="article_img">#}
+            {#                                        <img src="images/c14.jpg" class="img-responsive" alt=""/>#}
+            {#                                    </div>#}
+            {#                                    <h3>admin</h3>#}
+            {#                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority#}
+            {#                                        have suffered alteration in some form, by injected humour, or randomised words#}
+            {#                                        which.</p>#}
+            {#                                    <div class="social-ul">#}
+            {#                                        <ul>#}
+            {#                                            <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-linkedin"><a href="#"><i class="fa fa-linkedin"></i></a>#}
+            {#                                            </li>#}
+            {#                                            <li class="social-youtube"><a href="#"><i#}
+            {#                                                    class="fa fa-youtube-play"></i></a></li>#}
+            {#                                        </ul>#}
+            {#                                    </div>#}
+            {#                                    <div class="clearfix"></div>#}
+            {#                                </div>#}
+            {#                            </li>#}
+            {#                        </ul>#}
+            {#                    </div>#}
+            {#                </section>#}
+            {#            </div>#}
+            <div class="col-md-9 column-15">
+                <h6>{{ article.title }}</h6>
+                <div class="single_post_bottom clearfix">
+                    <div class="col-md-4 article_post">
+                        {% if article.is_reproduce %}
+                            <div class="single_post">原文来至：<a class="heading_font"
+                                                             href="{{ article.reproduce_url }}">{{ article.reproduce_user }}</a>
+                            </div>
+                        {% else %}
+                            <div class="single_post">本文作者：{{ article.user }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 article_post text-center" style="width: 230px;">
+                        <div class="single_post_meta">
+                            <span class="post_date">{{ article.date_publish }}</span>
+                            <span class="post_views"><i class="fa fa-eye"></i>
+                                <span>{{ article.click_count }}</span>
+                            </span>
+                            <span class="post_likes">
+			                    <span class="cstheme_likes cstheme_add_like">
+			                        <i class="fa fa-heart"></i>
+			                        <span class="likes_count">{{ article.fav_num }}</span>
+			                    </span>
+			                </span>
+                            <div class="bshare-custom"><div class="bsPromo bsPromo1"></div><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ好友" class="bshare-qqim"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+
+{#                            <span class="post-meta-comments"><i class="fa fa-comments"></i>2</span>#}
+                        </div>
+                    </div>
+
+                    <div class="btn"  id="jsLeftBtn" style="color: #00a0e9">
+                        {% if has_fav_article %}已收藏{% else %}收藏{% endif %}
+                    </div>
+                </div>
+                {% autoescape off %}
+                    {{ article.content }}
+                {% endautoescape %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block custom_js %}
+<script type="text/javascript">
+//收藏分享
+function add_fav(current_elem, article_id){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'article:add_fav' %}",
+        data:{'article_id':article_id},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg == '用户未登录'){
+                    window.location.href="/login/";
+                }else{
+                    alert(data.msg)
+                }
+
+            }else if(data.status == 'success'){
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+
+$('#jsLeftBtn').on('click', function(){
+    add_fav($(this), {{ article.id }});
+});
+
+
+
+</script>
+
+{% endblock %}

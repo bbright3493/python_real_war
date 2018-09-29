@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+
+
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Community Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+
+    <link rel="shortcut icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon"/>
+
+    {% block custom_css %}
+        <style>
+        .course-list:hover {
+            text-decoration: none;
+            color: #56CFCA;
+        }
+
+        .course-list {
+            color: white;
+        }
+
+    </style>
+    {% endblock %}
+
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href="{% static 'css/bootstrap-3.1.1.min.css' %}" rel='stylesheet' type='text/css'/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Custom Theme files -->
+    <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css'/>
+    <!--webfont-->
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+    <!-- Owl Stylesheets -->
+    <script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+    <!----drop down----->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!----font-Awesome----->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!----font-Awesome----->
+    <!--light-box-files -->
+    <script src="{% static 'js/jquery.chocolat.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/chocolat.css' %}" type="text/css" media="screen" charset="utf-8"/>
+
+
+    <!--light-box-files -->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('.gallery a').Chocolat();
+        });
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="col-sm-4 logo" style="">
+            <h1><a href="{% url 'index' %}"><img src="{% static 'images/logo.jpg' %}" alt="" style="width: 50px;height:80px;">
+                <span class="highlight">P</span>ython实战派</a></h1>
+        </div>
+        <div class="col-sm-8 logo_right">
+            <div class="social">
+                <a href="#" onclick="return false"><span
+                        class="fa fa-calendar" style="color: black;"></span> <span id="sign"
+                                                                                   style="color: black;"></span></a>
+            </div>
+            <!-- script for menu -->
+            <span class="menu"></span>
+            <div class="top-menu">
+                <ul>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'users:info' %}" class="btn btn-default btn-default_2 pull-left"><img
+                                src="{% static 'images/c1.jpg' %}" alt="" class="img-circle"
+                                style="width: 20px; height: 20px; margin-top: -5px;">&nbsp;&nbsp;{{ request.user.nick_name }}
+                        </a></li>
+                        <li><a href="{% url 'logout' %}" class="btn btn-default btn-default_2 pull-left">退出</a></li>
+                    {% else %}
+                        <li><a href="#" class="btn btn-default btn-default_2 pull-left" data-toggle="modal"
+                               data-target="#applyModal">登录</a></li>
+                        <li><a href="#" class="btn btn-default btn-default_2 pull-left" data-toggle="modal"
+                               data-target="#applyModal_1">注册</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <!-- Modal -->
+            <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog_2">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <div class="head_4">
+                                    <p>登录</p>
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="register" id="jsStayForm">
+                                <div class="section">
+                                    <label for="username" class="field prepend-icon">
+                                        <input type="text" name="username" id="username" placeholder="用户名">
+                                        <label for="username" class="field-icon">
+                                            <i class="fa fa-user"></i>
+                                        </label>
+                                    </label>
+                                </div>
+                                <div class="section">
+                                    <label for="password" class="field prepend-icon">
+                                        <input type="password" name="password" id="password" placeholder="密码">
+                                        <label for="password" class="field-icon">
+                                            <i class="fa fa-lock"></i>
+                                        </label>
+                                    </label>
+                                </div>
+                                <div class="section">
+                                    <div class="submit"><input type="button" id="jsStayBtn" value="Login"
+                                                               class="btn btn-warning"></div>
+                                </div>
+                                <ul class="new">
+                                    <li class="new_left"><p><a href="{% url 'forget_pwd' %}">忘记密码 ?</a></p></li>
+                                    <li class="new_right"><p class="sign">还没注册 ?&nbsp;&nbsp;<a href="#"
+                                                                                               id="register">注册</a>
+                                    </p></li>
+                                    <div class="clearfix"></div>
+                                </ul>
+                                {% csrf_token %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="applyModal_1" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog dialog_3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <div class="head_4">
+                                    <p>注册</p>
+                                </div>
+                            </h4>
+                        </div>
+                        <form name="row" method="post" class="register" id="jsReForm">
+                            <div class="section">
+                                <label for="username" class="field prepend-icon">
+                                    <input type="text" name="reusername" id="reusername" placeholder="Username">
+                                    <label for="email id" class="field-icon">
+                                        <i class="fa fa-user"></i>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="section">
+                                <label for="password" class="field prepend-icon">
+                                    <input type="password" name="repassword" id="repassword" placeholder="Password">
+                                    <label for="password" class="field-icon">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="section">
+                                <label for="username" class="field prepend-icon">
+                                    <input type="text" name="renickname" id="renickname"
+                                           placeholder="Nickname">
+                                    <label for="mobile number" class="field-icon">
+                                        <i class="fa fa-user-md"></i>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="section">
+                                <label for="username" class="field prepend-icon">
+                                    <input type="text" name="reemail" id="reemail"
+                                           placeholder="Email">
+                                    <label for="email" class="field-icon">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </label>
+                                </label>
+                            </div>
+
+                            <div class="section">
+                                <div class="submit"><input type="button" id="jsReBtn" value="Register"
+                                                           class="btn btn-warning"></div>
+                            </div>
+                            <div class="checkbox check_1">
+                                <input id="check1" type="checkbox" name="check" value="check1">
+                                <label for="check1">I agree to the Terms of Service and Privacy Policy</label>
+                            </div>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" title="网站模板">网站模板</a></div>
+<nav class="navbar nav_bottom" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header nav_2">
+            <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                    data-target="#bs-megadropdown-tabs">Menu
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        {% block nav %}
+            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                <ul class="nav navbar-nav nav_1">
+                    <li {% if request.path == '/' %}class="current_page"{% endif %}><a href="{% url 'index' %}">首页</a>
+                    </li>
+                    <li {% if request.path|slice:"8" == '/course/' %}class="current_page"{% endif %}><a
+                            href="{% url 'course:course_list' %}">课程中心</a></li>
+                    <li {% if request.path|slice:"6" == '/live/' %}class="current_page"{% endif %}><a
+                            href="{% url 'live:live_preview' %}">直播预告</a></li>
+                    <li class="dropdown {% if request.path|slice:'9' == '/article/' %}current_page{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">原创文章<span class="caret"></span></a>
+                        <ul class="dropdown-menu drop_menu" role="menu">
+                            <li><a href="{% url 'article:all_article_list'  %}">所有文章</a></li>
+                            {% for category in request.session.category %}
+                                <li><a href="{% url 'article:article_list' category %}">{{ category }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li {% if request.path|slice:"9" == '/project/' %}class="current_page"{% endif %}>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'project:project_list' %}">项目演习</a>
+                        {% else %}
+                            <a href="#" onclick="return false" id="project_show">项目演习</a>
+                        {% endif %}
+                    </li>
+                    <li {% if request.path|slice:"7" == '/users/' %}class="current_page"{% endif %}>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'users:info' %}">个人中心</a>
+                        {% else %}
+                            <a href="#" onclick="return false" id="user-info">个人中心</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                <div class="help_line">
+                    <div id="txtblnk"><p>移动端请关注公众号：python实战派</p></div>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        {% endblock %}
+    </div>
+</nav>
+<script type="text/javascript">
+    $(function () {
+        blinkeffect('#txtblnk');
+    })
+
+    function blinkeffect(selector) {
+        $(selector).fadeOut('slow', function () {
+            $(this).fadeIn('slow', function () {
+                blinkeffect(this);
+            });
+        });
+    }
+</script>
+<div class="demo">
+    <marquee behavior="scroll" style="background:#F3DB28; color:#000;" direction="left" onmouseover="this.stop();"
+             onmouseout="this.start();">
+        {{ notice.content }}
+    </marquee>
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+
+<div class="footer_bottom">
+    <div class="container">
+        <div class="copy">
+            <p>备案号 xxxxxx</p>
+        </div>
+    </div>
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;">Top </span></a>
+    <script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+
+
+            $().UItoTop({easingType: 'easeOutQuart'});
+
+        });
+    </script>
+</div>
+<!----language selector----->
+<script type="text/javascript" src="{% static 'js/jquery.leanModal.min.js' %}"></script>
+<link href="{% static 'css/jquery.uls.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/jquery.uls.grid.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/jquery.uls.lcd.css' %}" rel="stylesheet"/>
+<!-- Source -->
+<script src="{% static 'js/jquery.uls.data.js' %}"></script>
+<script src="{% static 'js/jquery.uls.data.utils.js' %}"></script>
+<script src="{% static 'js/jquery.uls.lcd.js' %}"></script>
+<script src="{% static 'js/jquery.uls.languagefilter.js' %}"></script>
+<script src="{% static 'js/jquery.uls.regionfilter.js' %}"></script>
+<script src="{% static 'js/jquery.uls.core.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.uls-trigger').uls({
+            onSelect: function (language) {
+                var languageName = $.uls.data.getAutonym(language);
+                $('.uls-trigger').text(languageName);
+            },
+            quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+        });
+    });
+</script>
+
+<!--签到-->
+<script>
+    $(function () {
+        //$('#sign').on('click', function () {
+        //    $('#applyModal').modal('show');
+        //});
+
+
+        function getFormatDate() {
+            var nowDate = new Date();
+            var year = nowDate.getFullYear();
+            var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+            var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+            // var hour = nowDate.getHours()< 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+            // var minute = nowDate.getMinutes()< 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+            // var second = nowDate.getSeconds()< 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+            return year + "年" + month + "月" + date + "日";
+        }
+
+        var str = getFormatDate();
+        $('#sign').text(str);
+
+
+        //var interval = (24 - mydate.getHours()) * 3600 + (60 - mydate.getMinutes()) * 60 + (60 - mydate.getSeconds());
+        //var time = setInterval(function () {
+        //    $(".al_sign").addClass('sign_show');
+        // });
+        //$('.sign').on('click', function () {
+        //   $(this).addClass('sign_show');
+        //   $('#al_sign').removeClass('sign_show');
+        // })
+    })
+</script>
+
+<!-- 个人中心 -->
+<script>
+    $(function () {
+        $('#user-info').on('click', function () {
+            $('#applyModal').modal('show');
+        });
+
+        $('#project_show').on('click', function () {
+            $('#applyModal').modal('show');
+        });
+
+        $('#register').on('click', function () {
+            $('#applyModal').modal('hide');
+            $('#applyModal_1').modal('show');
+        })
+    })
+</script>
+
+
+<!-- login -->
+<script>
+    $(function () {
+        $('#jsStayBtn').on('click', function () {
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "{% url 'login' %}",
+                data: $('#jsStayForm').serialize(),
+                async: true,
+                success: function (data) {
+                    if (data.status == 'success') {
+                        window.location.reload();
+                    } else if (data.status == 'fail') {
+                        alert("提交错误");
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+<!-- register -->
+<script>
+    $(function () {
+        $('#jsReBtn').on('click', function () {
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "{% url 'register' %}",
+                data: $('#jsReForm').serialize(),
+                async: true,
+                success: function (data) {
+                    if (data.status == 'success') {
+                        alert("注册成功");
+                    } else if (data.status == 'fail') {
+                        alert(data.msg);
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+{% block custom_js %}
+
+
+{% endblock %}
+
+<!-- FlexSlider -->
+<link href="{% static 'css/flexslider.css' %}" rel='stylesheet' type='text/css'/>
+<script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+        SyntaxHighlighter.all();
+    });
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function (slider) {
+                $('body').removeClass('loading');
+            }
+        });
+    });
+</script>
+<!-- FlexSlider -->
+
+
+</body>
+</html>

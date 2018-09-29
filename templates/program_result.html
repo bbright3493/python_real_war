@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>编程特训结果</h2>
+            <span class="breadcrumbs">
+                <a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> /
+                <a href="{% url 'course:course_list' %}" class="course-list"><span >课程列表</span></a> /
+                <a href="{% url 'course:course_level' course.id %}" class="course-list" ><span>{{ course.name }}</span></a> /
+                <a href="{% url 'course:course_detail' course.id lesson.id %}" class="course-list" ><span >{{ lesson.name }}</span></a> /
+                <span style="color: #56CFCA;">编程特训结果</span>
+            </span>
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+            <div class="col-md-3 column-11">
+            </div>
+            <div class="col-md-9 column-15">
+                <h4 class="m_11" style="text-align: center;">编程特训结果</h4>
+                <div class="content-inner_1">
+
+{#                    <div class="row">#}
+{#                        <div class="col-md-3">#}
+{#                            <h3>答&nbsp;&nbsp;&nbsp;对：</h3>#}
+{#                        </div>#}
+{#                        <div class="col-md-6">#}
+{#                            <div class="progress progress_1">#}
+{#                                <div class="progress-bar " style="width: {{ right_nums }}%" role="progressbar" aria-valuenow="28"#}
+{#                                     aria-valuemin="0" aria-valuemax="100">#}
+{#                                    <div class="progress-bar-value_3">28%</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                    <p>&nbsp;</p>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>正确率：</h3>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="progress progress_2">
+                                <div class="progress-bar " style="width: {{ right_rate }}%" role="progressbar" aria-valuenow="{{ right_rate }}"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar-value_4">{{ right_rate }}%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col-md-12">
+                            <div class="alert alert_1" role="alert"
+                                 style=" color: #ffffff; border-color: #a3da36; background-color: #a3da36;">
+                                <i class="fa fa-bell"></i>
+                                {% ifequal right_rate 100 %}
+                                    恭喜你！全部答对，学的棒棒哒！
+                                {% else %}
+                                    没有全部答对 请继续努力 点击下方错题链接 可查看答案
+                                {% endifequal %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                     <div class="row" style="margin-top: 50px;">
+                        <div class="col-md-12">
+                            <div class="alert alert_1" role="alert" style=" color: #ffffff; border-color: #a3da36; background-color: #a3da36;">
+                                {% ifnotequal right_rate 100 %}
+                                    <p>做错的题目</p>
+                                    {% for error in errors %}
+                                        <p>第{{ error.question_num }}题 <a href="{% url 'course:program_question' course_id lesson_id err.id %}">返回编程页点击左侧参考源码下载查看答案</a></p>
+                                    {% endfor %}
+
+                                {% endifnotequal %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}

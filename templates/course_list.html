@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <style>
+        .current, .current a span {
+            background-color: #56CFCA;
+            color: white;
+        }
+
+        .cur a:hover {
+            color: #56CFCA;
+        }
+
+        .cur_no_active {
+            color: black;
+        }
+
+        .cur_active {
+            color: #56CFCA;
+        {#color: black;#}
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>课程中心</h2>
+            <span class="breadcrumbs"><a href="index.html"><i
+                    class="fa fa-home home_1"></i></a> / <span>课程列表</span></span>
+        </div>
+    </div>
+    <div class="about_middle" style="">
+        <div class="container" style="margin-top: -20px;">
+            <div id="column" class="sub_col sub_col1" style="height: 65px;">
+                <div class="text-inner" style="width: 180px;float: left;"><p>&nbsp;&nbsp;&nbsp;&nbsp;<i
+                        class="fa fa-book" aria-hidden="true"></i></p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;课程分类</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-1" style="">
+                        <span style="font-size: 20px;margin-top: 15px;font-weight: bold;">方向：</span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="top-menu" style="float: left;margin-left: -15px;">
+                            <ul class="direction">
+                                <li {% if click_direction == "" or click_direction == "all" %}class="current"{% endif %}>
+                                    <a href="?direction=all" class="btn btn-default btn-default_2"><span
+                                            style="font-size: 17px;">全部</span></a></li>
+                                <li {% if click_direction == "base" %}class="current"{% endif %}>
+                                    <a href="?direction=base" class="btn btn-default btn-default_2"><span
+                                            style="font-size: 17px;">基础课程</span></a></li>
+                                <li {% if click_direction == "project" %}class="current"{% endif %}>
+                                    <a href="?direction=project" class="btn btn-default btn-default_2"><span
+                                            style="font-size: 17px;">项目课程</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="column" class=" sub_col1" style="height: 65px;">
+                <div class="text-inner" style="width: 180px;float: left;"><p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-1" style="">
+                        <span style="font-size: 20px;margin-top: 15px;font-weight: bold;">分类：</span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="top-menu" style="float: left;margin-left: -15px;">
+                            <ul class="category">
+                                <li {% if click_category == "" or click_category == "all" %}class="current"{% endif %}>
+                                    <a href="?direction={{ click_direction }}&category=all"
+                                       class="btn btn-default btn-default_2"><span
+                                            style="font-size: 17px;">全部</span></a></li>
+                                {% for category in all_category %}
+                                    <li {% if click_category == category.category %}class="current"{% endif %}><a
+                                            href="?direction={{ click_direction }}&category={{ category.category }}"
+                                            class="btn btn-default btn-default_2"><span
+                                            style="font-size: 17px;" id="category">{{ category.category }}</span></a>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="column" class="sub_col1" style="height: 65px;">
+                <div class="text-inner" style="width: 180px;float: left;"><p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-1" style="">
+                        <span style="font-size: 20px;margin-top: 15px;font-weight: bold;">难度：</span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="top-menu" style="float: left;margin-left: -15px;">
+                            <ul class="degree">
+                                <li {% if click_degree == "all" %}class="current"{% endif %}><a
+                                        href="?direction={{ click_direction }}&category={{ click_category }}&degree=all"
+                                        class="btn btn-default btn-default_2"><span
+                                        style="font-size: 17px;">全部</span></a></li>
+                                <li {% if click_degree == "cj" %}class="current"{% endif %}><a
+                                        href="?direction={{ click_direction }}&category={{ click_category }}&degree=cj"
+                                        class="btn btn-default btn-default_2"><span
+                                        style="font-size: 17px;">初级</span></a></li>
+                                <li {% if click_degree == "zj" %}class="current"{% endif %}><a
+                                        href="?direction={{ click_direction }}&category={{ click_category }}&degree=zj"
+                                        class="btn btn-default btn-default_2"><span
+                                        style="font-size: 17px;">中级</span></a></li>
+                                <li {% if click_degree == "gj" %}class="current"{% endif %}><a
+                                        href="?direction={{ click_direction }}&category={{ click_category }}&degree=gj"
+                                        class="btn btn-default btn-default_2"><span
+                                        style="font-size: 17px;">高级</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="column_5">
+                <div class="cur" style="margin-left: 40px;">
+                    <a {% if click_sort == "new" %}class="cur_active"{% else %}class="cur_no_active"{% endif %}
+                       href="?category={{ click_category }}&degree={{ click_degree }}&sort=new"
+                       style="text-decoration: none;"><span
+                            style="font-size: 15px;">最新</span></a>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <a {% if click_sort == "hot" %}class="cur_active"{% else %}class="cur_no_active"{% endif %}
+                       href="?category={{ click_category }}&degree={{ click_degree }}&sort=hot"
+                       style="text-decoration: none;"><span style="font-size: 15px;">最热</span></a>
+                </div>
+                <div class="course">
+                    {% for course in all_course.object_list %}
+                        <div class="col-md-4" style="margin-bottom: 50px;">
+                            <div class="item-testimonial">
+                                <div class="content_box" style="width: 320px;height: 275px;">
+                                    <blockquote>
+                                        <h4>{{ course.name }}</h4>
+                                        <div class="post-meta clearfix">
+                                    <span class="post_meta_category"><a
+                                            href="classified_detail.html">{{ course.get_degree_display }}</a></span>
+                                            <span class="post-meta-date"><i
+                                                    class="fa fa-user"></i>{{ course.students }}</span>
+                                            <span class="post-meta-comments"><i class="fa fa-comment"></i>1</span>
+                                        </div>
+                                        <p>
+                                            {{ course.desc|slice:"40" }}...
+                                        </p>
+                                        <footer style="">
+                                            {% if request.user.is_authenticated %}
+                                                STUDY - <a href="{% url 'course:course_level' course.id %}">学习吧!</a>
+                                            {% else %}
+                                                STUDY - <a href="#" onclick="return false" id="study">学习吧!</a>
+                                            {% endif %}
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                                <div class="avatar"><img src="{{ MEDIA_URL }}{{ course.image }}"
+                                                         class="img-responsive" alt=""
+                                                         style="height: 70px;width: 80px;"/></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="clearfix"></div>
+                <div class="c-pagination">
+                    <section class="pagination_1" style="text-align: center">
+                        <ul class="pagination m_7">
+                            {% if all_course.has_previous %}
+                                <li><a class="prev page-numbers"
+                                       href="?{{ all_course.previous_page_number.querystring }}">上一页</a></li>
+                            {% endif %}
+
+                            {% for page in all_course.pages %}
+                                {% if page %}
+                                    {% ifequal page all_course.number %}
+                                        <li><a class="page-numbers current"
+                                               href="?{{ page.querystring }}">{{ page }}</a></li>
+                                    {% else %}
+                                        <li><a class="page-numbers" href="?{{ page.querystring }}">{{ page }}</a></li>
+                                    {% endifequal %}
+                                {% else %}
+                                    <li><a class="page-numbers" href="#">...</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if all_course.has_next %}
+                                <li><a class="next page-numbers" href="?{{ all_course.next_page_number.querystring }}">下一页</a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block custom_js %}
+    <script>
+        $(function () {
+            $('#study').on('click', function () {
+                $('#applyModal').modal('show');
+            });
+
+            $(".category li").click(function () {
+                $(".category li").removeClass("current");
+                $(this).addClass("current");
+            });
+
+            $(".degree li").click(function () {
+                $(".degree li").removeClass("current");
+                $(this).addClass("current");
+            });
+
+            $(".cur a").click(function () {
+                {#alert("13");#}
+                {#$(".cur a").removeClass("cur_active");#}
+                {#$(this).addClass("cur_active");#}
+                {#$(this).text("haixing");#}
+            });
+        })
+    </script>
+
+{% endblock %}
+
+
+
+

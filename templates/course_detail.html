@@ -1,0 +1,378 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>{{ lesson.name }}</h2>
+            <span class="breadcrumbs">
+                <a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> /
+                <a href="{% url 'course:course_list' %}" class="course-list"><span >课程列表</span></a> /
+                <a href="{% url 'course:course_level' course.id %}" class="course-list" ><span>{{ course.name }}</span></a> /
+                <span style="color: #56CFCA;">{{ lesson.name }}</span>
+            </span>
+
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+            <div class="col-md-3 forum">
+                <div>
+{#                    <img src="{{ MEDIA_URL }}{{ course.image }}" alt="" style="width: 230px;">#}
+                    <h3 style="color: cyan;text-align: center;">学习目标</h3>
+                    <br>
+                    <h4 style="color: white;">{{ lesson.learn_target }}</h4>
+                    <br>
+                    <h3 style="color: cyan;text-align: center;">学习建议</h3>
+                    <br>
+                    <h4 style="color: white;">{{ lesson.learn_require }}</h4>
+                    <br>
+                    <h3 style="color: cyan;text-align: center;">关卡状态</h3>
+                    <br>
+                    <h4 style="color: white;">{{ user_lesson.get_status_display }}</h4>
+                    <br>
+                    <h3 style="color: cyan;text-align: center;">学习状态</h3>
+                    <br>
+                    <h4 style="color: white;">{{ user_lesson.get_lesson_study_status_display }}</h4>
+                </div>
+            </div>
+            <div class="col-md-9 column-15">
+                <h6>{{ lesson.name }}</h6>
+
+                <div class="accordation">
+                    <div class="jb-accordion-wrapper wrapper_2">
+                        <div class="jb-accordion-title"> 学习视频
+                            <button type="button" class="jb-accordion-button" data-toggle="collapse"
+                                    data-target="#accordion-1-"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <p><!-- /.accordion-title -->
+                        </p>
+                        <div id="accordion-1-" class="jb-accordion-content collapse in" style="height: auto;">
+                            <div class="list-group">
+                                {% for vedio in all_vedio %}
+                                    <a href="{{ vedio.url }}" class="list-group-item"
+                                       style="color: black;">{{ vedio.id }}.{{ vedio.name }}</a>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <p><!-- /.collapse --></p>
+                    </div>
+                    <div class="jb-accordion-wrapper wrapper_2">
+                        <div class="jb-accordion-title"> 本章教程
+                            <button type="button" class="jb-accordion-button collapsed" data-toggle="collapse"
+                                    data-target="#accordion2-"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <p><!-- /.accordion-title -->
+                        </p>
+                        <div id="accordion2-" class="jb-accordion-content collapse in" style="height: auto;">
+                            <div class="list-group">
+                                {% for article in all_article %}
+                                    <a href="{% url 'article:article_detail' article.id %}" class="list-group-item"
+                                       style="color: black;">{{ article.title }}</a>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <p><!-- /.collapse --></p>
+                    </div>
+                    <div class="jb-accordion-wrapper wrapper_2">
+                        <div class="jb-accordion-title"> 学习资料
+                            <button type="button" class="jb-accordion-button"><i class="fa fa-arrow-circle-o-down"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="icons_box1">
+                    <div class="col-sm-6 box_1">
+                        <div class="feature-box" style="width: 315px; height: 315px;">
+                            <i class="fa fa-user face"></i>
+                            <h4>选择题库</h4>
+                            <p>{{ choice_bank.desc }}</p>
+                            <a class="post_content_readmore"
+                               href="{% url 'course:choice_question' course.id lesson.id 1 %}" style="font-size: 18px;">开始练习吧！<i
+                                    class="fa fa-chevron-right" style="font-size: 14px; line-height: 26px;"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 box_3">
+                        <div class="feature-box" style="width: 315px; height: 315px;">
+                            <i class="fa fa-folder-open face"></i>
+                            <h4>实操题库</h4>
+                            <p>{{ program_bank.desc }}</p>
+
+                            <a class="post_content_readmore"
+                               href="{% url 'course:program_question' course.id lesson.id lesson.get_program_id.id %}"
+                               style="font-size: 18px;">开始练习吧！<i
+                                    class="fa fa-chevron-right" style="font-size: 14px; line-height: 26px;"></i></a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row" style="margin-top: 80px;">
+                    <!--<a href="#" class="add_btn classi_btn" data-toggle="modal" data-target="#applyModal">Add Free Classified</a>-->
+                    <div class="col-md-4">
+                        <a href="#" class="add_btn more_btn">我要提问</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#" class="add_btn more_btn">我要讨论</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#" class="add_btn more_btn" id="level_complete" onclick="return false">
+                            {% if lesson.pass_level %}已完成{% else %}我已完成{% endif %}
+                        </a>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 50px;">
+                    <div class="col-md-12">
+                        <div class="alert alert_1" role="alert"
+                             style=" color: #ffffff; border-color: #a3da36; background-color: #a3da36;">
+                            <i class="fa fa-folder-open"></i>
+                            扩展资料下载
+
+                            <span style="position: absolute;right: 40px;">
+                                <a href="" data-toggle="modal" data-target="#extendDownload" style="text-decoration: none;color: #ffffff">
+                                    <i class="fa fa-arrow-circle-o-down fa-lg"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="extendDownload" tabindex="-1" role="dialog"
+                     aria-labelledby="applyModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog_2">
+                        <div class="modal-content" style="width: 450px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                                <h5 class="modal-title" id="myModalLabel">
+                                    <div class="head_4">
+                                        <p>扩展资料下载</p>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                <form class="register" id="jsStayForm">
+                                    <div class="section">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4><i class="fa fa-file fa-lg" aria-hidden="true"></i> <span style="">Python遗传算法的解释</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section">
+                                        需要积分：<span style="color: #d58512;">{{ extend_demand.intergral }}</span>&nbsp;&nbsp;&nbsp;&nbsp;下载个数：<span
+                                            style="color: #d58512;">{{ extend_demand.download_count }}</span>
+                                    </div>
+                                    <div class="section">
+                                        <div><input type="button"
+                                                                                                   id="download_url"
+                                                                                                   value="下载链接"
+                                                                                                   class="btn btn-warning">
+                                        </div>
+                                    </div>
+                                    <div class="section no-intergral">
+
+                                    </div>
+                                    <ul class="new">
+                                        <li class="new_left"><p><a href="#">积分不够 ?</a></p></li>
+                                        <li class="new_right"><p class="sign"><a href="#"
+                                                                                 data-toggle="modal"
+                                                                                 data-target="#recharge"
+                                                                                 id="click_charge">点击充值</a></p></li>
+                                        <div class="clearfix"></div>
+                                    </ul>
+                                    {% csrf_token %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="recharge" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog_2">
+                        <div class="modal-content" style="width: 450px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                                <h5 class="modal-title" id="myModalLabel">
+                                    <div class="head_4">
+                                        <p>积分充值</p>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                <form class="register" id="rechargeForm">
+                                    <div class="section">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4><i class="fa fa-exclamation fa-lg" aria-hidden="true"></i> <span
+                                                        style="">￥1元==100积分</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section">
+                                        <label for="username" class="field prepend-icon">
+                                            <input type="text" name="recharge" id="recharge" placeholder="充值金额">
+                                            <label for="email id" class="field-icon">
+                                                <i class="fa fa-money"></i>
+                                            </label>
+                                        </label>
+                                    </div>
+
+                                    <div class="section">
+                                        <div style="float: left;">
+                                            <span>支付方式：</span>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div style="width: 236px;height: 86px;border: 2px solid red;background:url({% static 'images/pay_s.png' %}) no-repeat 55px -304px;cursor: pointer;">
+                                            <div style="width: 20px;height: 20px;position: absolute;left:216px;bottom: 0;">
+                                                <div style="border-bottom: 20px solid red;border-left: 20px solid transparent;">
+
+                                                </div>
+                                                <i class="fa fa-check" aria-hidden="true"
+                                                   style="position: absolute;top: 8px;left:8px;font-size: 8px;color: white;"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="section">
+                                        <div><input type="button"
+                                                    id="rechargeBtn"
+                                                    value="确认充值"
+                                                    class="btn btn-warning">
+                                        </div>
+                                    </div>
+                                    {% csrf_token %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if lesson.pass_level %}
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col-md-12">
+                            <div class="alert alert_1" role="alert"
+                                 style=" color: #ffffff; border-color: #a3da36; background-color: #a3da36;">
+                                <i class="fa fa-bell"></i>
+                                恭喜！你已经闯关成功！你可以开始下一关。
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <h3 style="text-align: center;position: relative; top: 50px;">常见问题</h3>
+                <dl class="faq-list">
+
+                    {% for faq in faqs %}
+                    <dt class="faq-list_h">
+                        <h4 class="marker">Q:</h4>
+                        <h5 class="marker_head">{{ faq.question }}</h5>
+                    </dt>
+                    <dd>
+                        <h4 class="marker1">A.</h4>
+                        <p class="m_13">{{ faq.answer }}</p>
+                    </dd>
+                     {% endfor %}
+
+                </dl>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+
+    <script>
+        $(function () {
+
+            $('#click_charge').on('click', function () {
+                $('#extendDownload').modal('hide');
+                $('#recharge').modal('show');
+            });
+
+            // 点击完成
+            $('#level_complete').on('click', function () {
+                alert("123");
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'course:level_complete' %}",
+                    data: {
+                        'course_id': {{ course.id }},
+                        'lesson_id': {{ lesson.id }}
+                    },
+                    async: true,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+                        alert({{ course.id }});
+                        if (data.status == 'success')
+                            $(this).text(data.msg);
+                        else
+                            $(this).text(data.msg);
+                    }
+                })
+            });
+
+            // 点击完成
+            $('#download_url').on('click', function () {
+                alert("123");
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'course:download_url' %}",
+                    data: {
+                        'type':"extend_download",
+                        'course_id': {{ course.id }},
+                        'lesson_id': {{ lesson.id }}
+                    },
+                    async: true,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            window.location.href = data.re_url;
+                        }else if (data.status == 'fail') {
+                            $('.no-intergral').html('<div>\n' +
+                                '                                            <span style="color: red;">您的积分不足，请充值！</span>\n' +
+                                '                                        </div>');
+                        }
+                    }
+                })
+            });
+
+            <!-- 充值 -->
+            $('#rechargeBtn').on('click', function () {
+                alert("123");
+                var newWindow = window.open();
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'recharge' %}",
+                    data: $('#rechargeForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            newWindow.location.href = data.re_url;
+                            {#window.open(data.re_url);#}
+                        } else if (data.status == 'fail') {
+                            alert("提交错误");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
+{% endblock %}
+
+
+

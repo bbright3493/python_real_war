@@ -1,0 +1,411 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link href="{% static 'css/common.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" type="text/css" rel="stylesheet">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-fileinput.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>{{ project.name }}</h2>
+            <span class="breadcrumbs">
+                <a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> /
+                <a href="{% url 'project:project_list' %}" class="home_desc">项目列表</a> /
+                <span style="color: #56CFCA;">{{ project.name }}</span>
+            </span>
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+
+            <div class="col-md-9 column-15">
+                <h4 class="m_11" style="text-align: center;">{{ project.name }}</h4>
+                <div class="content-inner_1">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>项目描述：</h3>
+                        </div>
+                    </div>
+                    <p>&nbsp;</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>{{ project.describe }}</h5>
+                        </div>
+                    </div>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <form class="contact">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h3>项目截图：</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{{ MEDIA_URL }}{{ project.image }}" alt=""
+                                     style="width: 400px;height: 400px;">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <textarea value="Message" style="color: #3c3c3c;" id="learned" readonly="readonly">
+                            {{ project.learned }}
+                        </textarea>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h4>相关课程</h4>
+                            </div>
+                            <div class="col-md-6">
+
+                                {% for course in project.course.all %}
+                                    <p></p>
+                                    <h4><a href="{% url 'course:course_level' course.id %}">{{ course.name }} 点击学习</a>
+                                    </h4>
+                                    <p></p>
+                                    <br>
+
+                                {% endfor %}
+
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 forum">
+
+
+                <div class="twitter-like-button  social-item ">
+                    <a href={{ project.url }} title="" target="_blank">
+                        <div class="social-item-inner">
+                            <span class="fa  fa-video-camera sc-icon"></span>
+                            <span class="like-text"> 观看项目演示视频 </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="fb-like-button social-item" data-toggle="modal" data-target="#joinModal"
+                     style="cursor: pointer;">
+                    <div class="social-item-inner">
+                        <span class="fa fa-arrow-right sc-icon"></span>
+                        <span class="like-text"> 参与项目 </span>
+                    </div>
+                </div>
+                <div class="linkedin-button  social-item " style="cursor: pointer;">
+                    {% if user_project %}
+                        <a href="{{ MEDIA_URL }}{{ project.require_file }}" class="downcode" target="_blank" download=""
+                           data-id="274" title="">
+                            <div class="social-item-inner">
+                                <span class="fa  fa-download sc-icon"></span>
+                                <span class="like-text"> 需求文档下载 </span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="social-item-inner" data-toggle="modal" data-target="#tipModal1">
+                            <span class="fa  fa-download sc-icon"></span>
+                            <span class="like-text"> 需求文档下载 </span>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+
+            <div class="twitter-like-button  social-item " style="cursor: pointer;">
+                    {% if user_project %}
+                        <a href="{{ MEDIA_URL }}{{ project.resouce }}" class="downcode" target="_blank" download=""
+                           data-id="274" title="">
+                            <div class="social-item-inner">
+                                <span class="fa  fa-download sc-icon"></span>
+                                <span class="like-text">项目素材下载</span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="social-item-inner" data-toggle="modal" data-target="#tipModal1">
+                            <span class="fa  fa-download sc-icon"></span>
+                            <span class="like-text"> 项目素材下载 </span>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+
+
+                <div class="gplus-like-button  social-item ">
+                    <div class="social-item-inner" data-toggle="modal" data-target="#getVideoModal"
+                         style="cursor: pointer;">
+                        <span class="fa  fa-cloud-download sc-icon"></span>
+                        <span class="like-text"> 获取项目讲解视频 </span>
+                    </div>
+
+                </div>
+
+                <div class="dribble-button  social-item " style="cursor: pointer;">
+                    {% if user_project %}
+                        <a href="{{ MEDIA_URL }}{{ project.code }}" class="downcode" target="_blank" download=""
+                           data-id="274" title="">
+                            <div class="social-item-inner">
+                                <span class="fa fa-code  sc-icon"></span>
+                                <span class="like-text"> 项目源码下载 </span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="social-item-inner" data-toggle="modal" data-target="#tipModal1">
+                            <span class="fa fa-code  sc-icon"></span>
+                            <span class="like-text"> 项目源码下载 </span>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="linkedin-button  social-item " style="cursor: pointer;">
+                    {% if user_project %}
+                        <a href="{{ MEDIA_URL }}{{ project.test_file }}" class="downcode" target="_blank" download=""
+                           data-id="274" title="">
+                            <div class="social-item-inner">
+                                <span class="fa  fa-file-text sc-icon"></span>
+                                <span class="like-text"> 项目测试文档下载 </span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="social-item-inner" data-toggle="modal" data-target="#tipModal1">
+                            <span class="fa  fa-file-text sc-icon"></span>
+                            <span class="like-text"> 项目测试文档下载 </span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            {#            <div class="col-md-3 column-1 column-13">#}
+            {##}
+            {##}
+            {#                <address class="address">#}
+            {#                <br>#}
+            {##}
+            {#                    <div class="fb-like-button social-item">#}
+            {#                        <a href="#" title="" target="_blank">#}
+            {#                            <div class="social-item-inner">#}
+            {#                                <span class="fa fa-heart-o sc-icon"></span>#}
+            {#                                <span class="like-text"> 收藏题目 </span>#}
+            {#                            </div>#}
+            {#                        </a>#}
+            {#                    </div>#}
+            {##}
+            {##}
+            {#                    <h3>相关课程</h3>#}
+            {#                    {% for course in project.course.all %}#}
+            {#                        <hr>#}
+            {#                        <img src="{{ MEDIA_URL }}{{ course.image }}">#}
+            {#                        <p></p>#}
+            {#                        <p></p>#}
+            {#                        <h4><a href="{% url 'course:course_level' course.id %}">{{ course.name }}</a></h4>#}
+            {#                        <p></p>#}
+            {#                        <div style="padding-left: 15px;padding-right:15px;">#}
+            {#                            <span style="color: white;">{{ course.detail|slice:"70" }}...</span>#}
+            {#                            <p></p>#}
+            {#                            <div>#}
+            {#                                <h4 style="float: left;">{{ course.get_degree_display }}</h4>#}
+            {#                                <i class="fa fa-user fa-lg"#}
+            {#                                   style="color: white">&nbsp;&nbsp;&nbsp;&nbsp;{{ course.students }}</i>#}
+            {#                                <span class="post-meta-comments fa-lg"><i class="fa fa-comment"></i>1</span>#}
+            {#                            </div>#}
+            {##}
+            {#                        </div>#}
+            {#                        <p></p>#}
+            {##}
+            {#                    {% endfor %}#}
+            {#                </address>#}
+            {##}
+            {#            </div>#}
+        </div>
+        <div class="clearfix"></div>
+
+
+        <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h6 class="modal-title" id="myModalLabel">
+                            提示
+                        </h6>
+                    </div>
+                    <div class="modal-body">
+                        参与该项目会扣除{{ project.intergal }}积分
+                        <br>
+                        点击确认按钮参与项目 点击取消关闭窗口
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="join">确认
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <div class="modal fade" id="tipModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h6 class="modal-title" id="myModalLabel">
+                            提示
+                        </h6>
+                    </div>
+                    <div class="modal-body">
+                        请先参与项目
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
+        <div class="modal fade" id="getVideoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h6 class="modal-title" id="myModalLabel">
+                            提示
+                        </h6>
+                    </div>
+                    <div class="modal-body">
+                        {% if user_project %}
+                            请按照如下百度网盘链接进行视频下载<br>
+                            {{ project.video }}
+                        {% else %}
+                            请先参与项目
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{% static 'js/imgUp.js' %}"></script>
+    <script src="{% static 'js/bootstrap-fileinput.js' %}"></script>
+
+    <script>
+
+        $(function () {
+
+            var cur_result = 0
+
+            $("#join").on("click", function () {
+
+                //代码发给后台处理
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'project:join_project' %}",
+                    data: {
+
+                        'project_id':{{ project_id }}
+                    },
+                    async: true,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            alert("恭喜 成功参与项目")
+                        }
+                        else if (data.status == 'fail1') {
+                            alert("不好意思 您已经参与该项目")
+
+                        }
+                        else {
+                            alert("不好意思 您的积分不足 可以签到 参加任务赚取积分 也可以直接充值获取积分")
+
+                        }
+                    }
+                })
+            });
+
+
+        })
+
+
+        //   上传附件到方法
+        function FileUpload() {
+            var form_data = new FormData();
+            var file_info1 = $('#programfile')[0].files[0];
+            var file_info2 = $('#picID')[0].files[0];
+            var learned = $('#learned').val();
+
+            form_data.append('file', file_info1);
+            form_data.append('image', file_info2);
+            form_data.append('learn', learned);
+            form_data.append('programId', {{ program_id }});
+
+            alert(form_data.get('learn'));
+
+            if (file_info1 == undefined) {//暂且不许要判断是否有附件
+                alert('你没有选择任何文件');
+                return false;
+            }
+            if (file_info2 == undefined) {//暂且不许要判断是否有附件
+                alert('你没有选择项目截图');
+                return false;
+            }
+
+            // 提交ajax的请求
+            $.ajax({
+                url: "{% url 'course:program_upload' %}",
+                type: 'POST',
+                data: form_data,
+                //data: {"form_data":form_data, "learned":learned},
+                processData: false,  // tell jquery not to process the data
+                contentType: false, // tell jquery not to set contentType
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function (callback) {
+
+                    console.log(order_id)
+                }
+            }); // end ajax
+        }
+
+    </script>
+
+{% endblock %}
+
+
+
+

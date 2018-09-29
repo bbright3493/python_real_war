@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>{{ course.name }}</h2>
+            <span class="breadcrumbs">
+                <a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> /
+                <a href="{% url 'course:course_list' %}" class="course-list"><span>课程列表</span></a> /
+                <span style="color: #56CFCA;">{{ course.name }}</span>
+            </span>
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+            <div class="col-md-3 forum">
+                <div>
+                    <img src="{{ MEDIA_URL }}{{ course.image }}" alt="" style="width: 230px;">
+                    <br>
+                    <br>
+                    <h3 style="color: white;text-align: center;">{{ course.name }}</h3>
+                    <br>
+                    <span style="color: white;">{{ course.detail|slice:"70" }}...</span>
+                    <br>
+                    {% if request.user.is_authenticated %}
+                        <span style="color: white;">{{ user_course.get_study_status_display }}</span>
+                    {% endif %}
+                    <br>
+                    <i class="fa fa-user fa-lg" style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;{{ course.students }}</i>
+                    <span class="post-meta-comments fa-lg"><i class="fa fa-comment"></i>1</span>
+                    <h4 style="color: white;text-align: center;">相关项目</h4>
+
+                    {% for project in projects %}
+                        <span style="color: white;"><a href="{% url 'project:project_result' project.id %}" class="course-list">{{ project.name }} 点击查看</a></span>
+                        <br>
+                    {% endfor %}
+
+
+
+                </div>
+            </div>
+            <div class="col-md-9 column-15">
+                <h6>{{ course.name }}</h6>
+                <ul class="photos_list">
+
+
+                    {% for level in user_levels %}
+                        <li {% if forloop.counter|divisibleby:3 %}class="last"{% endif %}>
+                            <div class="column-inner_layout">
+                                <div class="column-inner">
+                                    <div class="team layout">
+                                        <img class="img-responsive" src="{% static 'images/c5.jpg' %}" alt=""/>
+                                        <div class="team-body-info">
+                                            <div class="team-body">
+                                                <div class="team-body-content">
+                                                    <h6 class="team-name" style="font-size: 18px;">
+                                                        第 {{ forloop.counter }} 关</h6>
+                                                    <h6 class="team-name"
+                                                        style="font-size: 15px;">{{ level.lesson.name }}</h6>
+                                                    <div class="team-job">
+                                                        建议学习时长：{{ level.lesson.learn_times }}</div>
+                                                    <div class="team-job">{{ level.get_lesson_study_status_display }}</div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="photos_social-icons">
+                                                {#                                                {% if level.open_level %}#}
+                                                {#                                                    <a href="{% url 'course:course_detail' courseid level.id %}">#}
+                                                {#                                                        开始学习闯关</a>#}
+                                                {#                                                {% else %}#}
+                                                {#                                                    <span><i class="fa fa-lock"></i> 开始学习闯关</span>#}
+                                                {#                                                {% endif %}#}
+                                                <a href="{% url 'course:course_detail' course.id level.lesson.id %}">
+                                                    开始学习闯关</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                    <div class="clearfix"></div>
+                </ul>
+                {% if last_level.pass_level %}
+                    <div class="alert alert-success" role="alert" style="margin-top: 50px;">恭喜！你已经闯关成功！</div>
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

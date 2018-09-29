@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/jquery.countdown.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>直播预告</h2>
+            <span class="breadcrumbs"><a href="index.html"><i class="fa fa-home home_1"></i></a> / <a href="about.html"
+                                                                                                      class="home_desc">About</a> / <span>About_Work</span></span>
+        </div>
+    </div>
+    <div class="about_bottom">
+        <div class="container">
+            <div id="column" class="sub_col sub_col1" style="height: 65px;">
+                <div class="text-inner"><p>&nbsp;&nbsp;&nbsp;&nbsp;03</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Who we are</p>
+                </div>
+            </div>
+            <div class="col-md-3 column-1">
+                <div class="list-group">
+                    <a href="{% url 'live:live_preview' %}" class="list-group-item active">最近直播</a>
+                    <a href="{% url 'live:live_past' %}" class="list-group-item ">以往直播</a>
+                </div>
+            </div>
+            <div class="col-md-9 column-2">
+                <h4>Coming Soon............</h4>
+                <div class="timer_grid">
+                    <ul id="countdown">
+                    </ul>
+                    <ul class="navigation">
+                        <li>
+                            <p class="timeRefDays">DAYS</p>
+                        </li>
+                        <li>
+                            <p class="timeRefHours">HOURS</p>
+                        </li>
+                        <li>
+                            <p class="timeRefMinutes">MINUTES</p>
+                        </li>
+                        <li>
+                            <p class="timeRefSeconds">SECONDS</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 column-7 col-md-offset-3" style="margin-top: -160px;">
+                <h3>{{ live.title }}</h3>
+                <h4>直播老师：{{ live.user }}</h4>
+                <h4>直播时间：{{ live.live_time }}</h4>
+                <p>
+                    {% autoescape off %}
+                        {{ live.content }}
+                    {% endautoescape %}
+                </p>
+                <div class="footer-social about_social">
+                    <a target="_blank" href="" hidefocus="true" style="outline: none;"><i
+                            class="fa fa-facebook"></i></a>
+                    <a target="_blank" href="" hidefocus="true" style="outline: none;"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="" hidefocus="true" style="outline: none;"><i class="fa fa-google-plus"></i></a>
+                </div>
+                <div class="but_4">
+                    <a class="readmore" href="{{ live.link }}" title="Read More">直播地址</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'js/jquery.countdown.js' %}"></script>
+    <script>
+        $(function () {
+
+            var note = $('#note'),
+                ts = new Date({{ live.live_time.year }}, {{ live.live_time.month }}-1, {{ live.live_time.day }}, {{ live.live_time.hour }}, {{ live.live_time.minute }}),
+                newYear = true;
+
+            if ((new Date()) > ts) {
+                // The new year is here! Count towards something else.
+                // Notice the *1000 at the end - time must be in milliseconds
+                ts = (new Date()).getTime();
+                newYear = false;
+            }
+
+            $('#countdown').countdown({
+                timestamp: ts,
+                callback: function (days, hours, minutes, seconds) {
+
+                    var message = "";
+
+                    message += days + " day" + (days == 1 ? '' : 's') + ", ";
+                    message += hours + " hour" + (hours == 1 ? '' : 's') + ", ";
+                    message += minutes + " minute" + (minutes == 1 ? '' : 's') + " and ";
+                    message += seconds + " second" + (seconds == 1 ? '' : 's') + " <br />";
+
+                    if (newYear) {
+                        message += "left until the new year!";
+                    }
+                    else {
+                        message += "left to 10 days from now!";
+                    }
+
+                    note.html(message);
+                }
+            });
+
+        });
+
+    </script>
+{% endblock %}
+
+

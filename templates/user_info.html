@@ -1,0 +1,566 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/clndr.css' %}" type="text/css"/>
+{% endblock %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>个人中心</h2>
+            <span class="breadcrumbs">
+                <a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> /
+                <span>个人中心</span></span>
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+            <div class="col-md-3 column-17">
+                <div class="cal1 cal_2">
+                    <div class="clndr">
+                        <div class="clndr-controls">
+                            <div class="clndr-control-button"><p class="clndr-previous-button">previous</p></div>
+                            <div class="month">September 2015</div>
+                            <div class="clndr-control-button rightalign"><p class="clndr-next-button">next</p></div>
+                        </div>
+                        <table class="clndr-table" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                            <tr class="header-days">
+                                <td class="header-day">S</td>
+                                <td class="header-day">M</td>
+                                <td class="header-day">T</td>
+                                <td class="header-day">W</td>
+                                <td class="header-day">T</td>
+                                <td class="header-day">F</td>
+                                <td class="header-day">S</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="day past adjacent-month last-month calendar-day-2015-08-30">
+                                    <div class="day-contents">30</div>
+                                </td>
+                                <td class="day past adjacent-month last-month calendar-day-2015-08-31">
+                                    <div class="day-contents">31</div>
+                                </td>
+                                <td class="day today calendar-day-2015-09-01">
+                                    <div class="day-contents">1</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-02">
+                                    <div class="day-contents">2</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-03">
+                                    <div class="day-contents">3</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-04">
+                                    <div class="day-contents">4</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-05">
+                                    <div class="day-contents">5</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day calendar-day-2015-09-06">
+                                    <div class="day-contents">6</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-07">
+                                    <div class="day-contents">7</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-08">
+                                    <div class="day-contents">8</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-09">
+                                    <div class="day-contents">9</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-10">
+                                    <div class="day-contents">10</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-11">
+                                    <div class="day-contents">11</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-12">
+                                    <div class="day-contents">12</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day event calendar-day-2015-09-13">
+                                    <div class="day-contents">13</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-14">
+                                    <div class="day-contents">14</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-15">
+                                    <div class="day-contents">15</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-16">
+                                    <div class="day-contents">16</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-17">
+                                    <div class="day-contents">17</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-18">
+                                    <div class="day-contents">18</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-19">
+                                    <div class="day-contents">19</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day calendar-day-2015-09-20">
+                                    <div class="day-contents">20</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-21">
+                                    <div class="day-contents">21</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-22">
+                                    <div class="day-contents">22</div>
+                                </td>
+                                <td class="day event calendar-day-2015-09-23">
+                                    <div class="day-contents">23</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-24">
+                                    <div class="day-contents">24</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-25">
+                                    <div class="day-contents">25</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-26">
+                                    <div class="day-contents">26</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day calendar-day-2015-09-27">
+                                    <div class="day-contents">27</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-28">
+                                    <div class="day-contents">28</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-29">
+                                    <div class="day-contents">29</div>
+                                </td>
+                                <td class="day calendar-day-2015-09-30">
+                                    <div class="day-contents">30</div>
+                                </td>
+                                <td class="day adjacent-month next-month calendar-day-2015-10-01">
+                                    <div class="day-contents">1</div>
+                                </td>
+                                <td class="day adjacent-month next-month calendar-day-2015-10-02">
+                                    <div class="day-contents">2</div>
+                                </td>
+                                <td class="day adjacent-month next-month calendar-day-2015-10-03">
+                                    <div class="day-contents">3</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 column-2">
+                <div id="column" class="sub_col" style="height: 65px;">
+                    <div class="text-inner"><p>&nbsp;&nbsp;&nbsp;&nbsp;01</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于 </p>
+                    </div>
+                </div>
+                <div id="sub_col2">
+                    <h3>个人信息</h3>
+                    <h4>{{ request.user.name }}</h4>
+                </div>
+                <div class="clearfix"></div>
+                <table class="details" width="100%" border="0" cellspacing="2" cellpadding="2"
+                       style="margin-top: 60px;">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <div><h3>{{ request.user.nick_name }}</h3></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%" valign="top"><strong>手机号 : </strong></td>
+                        <td width="80%" valign="top">
+                            {{ request.user.mobile|default:'未填写' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><strong>邮&nbsp;&nbsp;&nbsp;&nbsp;箱 : </strong></td>
+                        <td valign="top">{{ request.user.email|default:'未填写' }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><strong>积&nbsp;&nbsp;&nbsp;&nbsp;分 : </strong></td>
+                        <td valign="top">{{ sign }}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><strong>地&nbsp;&nbsp;&nbsp;&nbsp;址 : </strong></td>
+                        <td valign="top">{{ request.user.address|default:'未填写' }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <strong>关于自己 : </strong>
+                            <br>
+                            <p>{{ request.user.sign|default:'未填写' }}</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><strong>
+                            <div class="row" style="margin-top: 50px;">
+                                <div class="col-md-4">
+                                    <a href="{{ past.link }}" class="add_btn more_btn" data-toggle="modal"
+                                       data-target="#change_info">修改信息</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{{ past.link }}" class="add_btn more_btn" data-toggle="modal"
+                                       data-target="#change_pwd">修改密码</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="{{ past.link }}" class="add_btn more_btn" data-toggle="modal"
+                                       data-target="#recharge">积分充值</a>
+                                </div>
+                            </div>
+
+                            <!-- Modal 修改信息 -->
+                            <div class="modal fade" id="change_info" tabindex="-1" role="dialog"
+                                 aria-labelledby="applyModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog dialog_3">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                <div class="head_4">
+                                                    <p style="font-size: 30px;">修改</p>
+                                                </div>
+                                            </h4>
+                                        </div>
+                                        <form name="row" method="post" class="register" id="modifyForm"
+                                              style="margin-top: -30px;">
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="modify_nickname" id="modify_nickname"
+                                                           placeholder="用户昵称">
+                                                    <label for="email id" class="field-icon">
+                                                        <i class="fa fa-user"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="modify_phone" id="modify_phone"
+                                                           placeholder="用户手机">
+                                                    <label for="mobile number" class="field-icon">
+                                                        <i class="fa fa-user-md"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="modify_email" id="modify_email"
+                                                           placeholder="用户邮箱">
+                                                    <label for="email" class="field-icon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="modify_address" id="modify_address"
+                                                           placeholder="用户地址">
+                                                    <label for="email" class="field-icon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="modify_about" id="modify_about"
+                                                           placeholder="一句话描述自己">
+                                                    <label for="email" class="field-icon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+
+                                            <div class="section">
+                                                <div class="submit"><input type="button" id="modifyBtn" value="修改"
+                                                                           class="btn btn-warning"></div>
+                                            </div>
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal 修改密码 -->
+                            <div class="modal fade" id="change_pwd" tabindex="-1" role="dialog"
+                                 aria-labelledby="applyModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog dialog_3">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                <div class="head_4">
+                                                    <p style="font-size: 30px;">修改密码</p>
+                                                </div>
+                                            </h4>
+                                        </div>
+                                        <form name="row" method="post" class="register" id="modifyPwdForm"
+                                              style="margin-top: -30px;">
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="old_pwd" id="old_pwd"
+                                                           placeholder="原密码">
+                                                    <label for="email id" class="field-icon">
+                                                        <i class="fa fa-user"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="new_pwd" id="new_pwd"
+                                                           placeholder="新密码">
+                                                    <label for="mobile number" class="field-icon">
+                                                        <i class="fa fa-user-md"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+                                            <div class="section">
+                                                <label for="username" class="field prepend-icon">
+                                                    <input type="text" name="confirm_pwd" id="confirm_pwd"
+                                                           placeholder="确认密码">
+                                                    <label for="email" class="field-icon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </label>
+                                                </label>
+                                            </div>
+
+                                            <div class="section">
+                                                <div class="submit"><input type="button" id="modifyPwdBtn" value="修改"
+                                                                           class="btn btn-warning"></div>
+                                            </div>
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal 积分充值 -->
+                            <div class="modal fade" id="recharge" tabindex="-1" role="dialog"
+                                 aria-labelledby="applyModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog_2">
+                                    <div class="modal-content" style="width: 450px;">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">×</span></button>
+                                            <h5 class="modal-title" id="myModalLabel">
+                                                <div class="head_4">
+                                                    <p>积分充值</p>
+                                                </div>
+                                            </h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="register" id="rechargeForm">
+                                                <div class="section">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h5><i class="fa fa-exclamation fa-lg"
+                                                                   aria-hidden="true"></i> <span
+                                                                    style="">￥1元==100积分</span>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="section">
+                                                    <label for="username" class="field prepend-icon">
+                                                        <input type="text" name="recharge" id="recharge"
+                                                               placeholder="充值金额">
+                                                        <label for="email id" class="field-icon">
+                                                            <i class="fa fa-money"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+
+                                                <div class="section">
+                                                    <div style="float: left;">
+                                                        <span>支付方式：</span>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                    <div style="width: 236px;height: 86px;border: 2px solid red;background:url({% static 'images/pay_s.png' %}) no-repeat 55px -304px;cursor: pointer;">
+                                                        <div style="width: 20px;height: 20px;position: absolute;left:216px;bottom: 0;">
+                                                            <div style="border-bottom: 20px solid red;border-left: 20px solid transparent;">
+
+                                                            </div>
+                                                            <i class="fa fa-check" aria-hidden="true"
+                                                               style="position: absolute;top: 8px;left:8px;font-size: 8px;color: white;"></i>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="section">
+                                                    <div><input type="button"
+                                                                id="rechargeBtn"
+                                                                value="确认充值"
+                                                                class="btn btn-warning">
+                                                    </div>
+                                                </div>
+                                                {% csrf_token %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </strong>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="about_middle" style="margin-bottom: 100px;">
+        <div class="container">
+            <div id="column" class="sub_col sub_col1" style="height: 65px;">
+                <div class="text-inner"><p>&nbsp;&nbsp;&nbsp;&nbsp;02</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的课程</p>
+                </div>
+            </div>
+            <div class="column_5">
+                {% for course in user_course %}
+                    <div class="col-md-4" style="margin-bottom: 50px;">
+                        <div class="item-testimonial">
+                            <div class="content_box">
+                                <blockquote>
+                                    <h4>{{ course.course.name }}</h4>
+                                    <p>
+                                        {{ course.course.desc }}
+                                    </p>
+                                    <footer>STUDY - <a href="{% url 'course:course_level' course.course.id %}">继续学习</a>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                            <div class="avatar"><img src="{{ MEDIA_URL }}{{ course.course.image }}"
+                                                     class="img-responsive" alt=""/></div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about_middle" style="margin-bottom: 100px;">
+        <div class="container">
+            <div id="column" class="sub_col sub_col1" style="height: 65px;">
+                <div class="text-inner"><p>&nbsp;&nbsp;&nbsp;&nbsp;03</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的项目</p>
+                </div>
+            </div>
+            <div class="column_5">
+                {% for user_project in user_projects %}
+                    <div class="col-md-4" style="margin-bottom: 50px;">
+                        <div class="item-testimonial">
+                            <div class="content_box">
+                                <blockquote>
+                                    <h4>{{ user_project.project.name }}</h4>
+                                    <p>
+                                        {{ user_project.project.describe }}
+                                    </p>
+                                    <footer>PROJECT - <a href="{% url 'project:project_result' user_project.project.id %}">继续摆弄项目</a>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                            <div class="avatar"><img src="{{ MEDIA_URL }}{{ user_project.project.image }}"
+                                                     class="img-responsive" alt=""/></div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{% static 'js/underscore-min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/moment-2.2.1.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/clndr.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/site.js' %}" type="text/javascript"></script>
+
+    <!-- 修改个人信息 -->
+    <script>
+        $(function () {
+            $('#modifyBtn').on('click', function () {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'users:modify_info' %}",
+                    data: $('#modifyForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            window.location.reload();
+                        } else if (data.status == 'fail') {
+                            alert("提交错误");
+                        }
+                    }
+                })
+            });
+
+            <!-- 充值 -->
+            $('#rechargeBtn').on('click', function () {
+                alert("123");
+                var newWindow = window.open();
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'recharge' %}",
+                    data: $('#rechargeForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            newWindow.location.href = data.re_url;
+                            {#window.open(data.re_url);#}
+                        } else if (data.status == 'fail') {
+                            alert("提交错误");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
+    <!-- 修改密码 -->
+    <script>
+        $(function () {
+            $('#modifyPwdBtn').on('click', function () {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'users:modify_pwd' %}",
+                    data: $('#modifyPwdForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            //window.location.reload();
+                            $('#change_pwd').modal('hide');
+                            $('#applyModal').modal('show');
+                            //window.location.reload();
+                        } else if (data.status == 'fail') {
+                            alert("提交错误");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}
+
+
+
+

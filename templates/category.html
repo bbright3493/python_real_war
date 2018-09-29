@@ -1,0 +1,25 @@
+{% for course in courses.object_list %}
+    <div class="col-md-4" style="margin-bottom: 50px;">
+        <div class="item-testimonial">
+            <div class="content_box" style="width: 320px;height: 275px;">
+                <blockquote>
+                    <h4>{{ course.name }}</h4>
+                    <div class="post-meta clearfix">
+                                    <span class="post_meta_category"><a
+                                            href="classified_detail.html">{{ course.get_degree_display }}</a></span>
+                        <span class="post-meta-date"><i
+                                class="fa fa-user"></i>{{ course.students }}</span>
+                        <span class="post-meta-comments"><i class="fa fa-comment"></i>1</span>
+                    </div>
+                    <p>
+                        {{ course.desc }}
+                    </p>
+                    <footer>STUDY - <a href="{% url 'course:course_level' course.id %}">学习吧!</a>
+                    </footer>
+                </blockquote>
+            </div>
+            <div class="avatar"><img src="{{ MEDIA_URL }}{{ course.image }}"
+                                     class="img-responsive" alt=""/></div>
+        </div>
+    </div>
+{% endfor %}

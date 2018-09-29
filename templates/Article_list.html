@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="about_banner">
+        <div class="container">
+            <h2>{{ category }}</h2>
+            <span class="breadcrumbs"><a href="{% url 'index' %}"><i
+                    class="fa fa-home home_1"></i></a> / <span>{{ category }}</span></span>
+        </div>
+    </div>
+    <div class="about_top">
+        <div class="container">
+
+            <div class="col-md-12 column-15">
+                <h6>{{ category }}</h6>
+                {% for article in all_article.object_list %}
+                    <div class="forum_box1">
+	   	 <span class="head_2">
+            <a href="{% url 'article:article_detail'  article.id %}">{{ article.title }}</a>
+         </span>
+                        <h3>{{ article.date_publish.date }}</h3>
+                        <div class="col-sm-3 forum_box1-left">
+                            <h4><a href="#" onclick="return false">{{ article.user }}</a></h4>
+                            <a href="{% url 'article:article_detail'  article.id %}"><img src="{{ MEDIA_URL }}{{ article.image }}"
+                                                                  class="img-responsive" alt=""/></a>
+                        </div>
+                        <div class="col-sm-9 forum_box1-right">
+                            <p>{{ article.desc }}</p>
+                            <div class="post-element clearfix">
+                                <div class="post__1">
+                                    <span class="post__1-item post__1-date"><a href="#">Add new Comment</a></span>
+                                    <span class="post__1-item"><span class="link_2"><a href="#" title="like me"
+                                                                                       class="like_button"
+                                                                                       onclick="return false">
+    		          <i class="fa fa-heart-o"></i></a></span><span>{{ article.fav_num }}</span>
+    		      </span>
+{#                                    <span class="post__1-item"><span class="link_2"><a href="#" title="comments"#}
+{#                                                                                       class="like_button"#}
+{#                                                                                       onclick="return false">#}
+{#    		          <i class="fa fa-comment-o"></i></a></span><span>12</span>#}
+{#    		      </span>#}
+                                    <span class="post__1-item"><span class="link_2"><a href="#" title="view me"
+                                                                                       class="like_button"
+                                                                                       onclick="return false">
+    		          <i class="fa fa-eye"></i></a></span><span>{{ article.click_count }}</span>
+    		      </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                {% endfor %}
+
+                <div class="c-pagination">
+                    <section class="pagination_1">
+                        <ul class="pagination m_7 pull-left">
+                            {% if all_article.has_previous %}
+                                <li><a class="prev page-numbers"
+                                       href="?{{ all_article.previous_page_number.querystring }}">上一页</a></li>
+                            {% endif %}
+
+                            {% for page in all_article.pages %}
+                                {% if page %}
+                                    {% ifequal page all_article.number %}
+                                        <li><a class="page-numbers current"
+                                               href="?{{ page.querystring }}">{{ page }}</a></li>
+                                    {% else %}
+                                        <li><a class="page-numbers" href="?{{ page.querystring }}">{{ page }}</a></li>
+                                    {% endifequal %}
+                                {% else %}
+                                    <li><a class="page-numbers" href="#">...</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if all_article.has_next %}
+                                <li><a class="next page-numbers" href="?{{ all_article.next_page_number.querystring }}">下一页</a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                        <div class="result-count pull-right">
+                            Showing 1 to 7 of 10 results
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
