@@ -70,7 +70,7 @@ class IndexView(View):
             category_dict['%s' % category.name] = '%s' % category.name
         # request.session['category'] = categories
         request.session['category'] = category_dict
-        print(request.session.get('category'))
+#        print(request.session.get('category'))
         for i in request.session.get('category'):
             print(i)
         print(categories)
