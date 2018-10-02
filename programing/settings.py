@@ -95,20 +95,31 @@ WSGI_APPLICATION = 'programing.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 # USE_LOCAL_DATABASE = False
-# USE_MAC = False
+USE_MAC = True
 
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "pythpi1",
-        'USER': 'root',
-        'PASSWORD': 'bb12345',
+if USE_MAC:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': "pythpi1",
+            'USER': 'root',
+            'PASSWORD': 'bb12345',
+            'HOST': '144.34.157.202',
+            'PORT': 3306,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': "pythpi1",
+            'USER': 'root',
+            'PASSWORD': 'bb12345',
+        }
+    }
 
 
 # Password validation
