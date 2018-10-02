@@ -160,7 +160,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/home/workspace/static/'
+STATIC_ROOT = '/home/workspace/python_real_war/static1'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
