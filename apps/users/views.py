@@ -73,7 +73,7 @@ class IndexView(View):
 #        print(request.session.get('category'))
         for i in request.session.get('category'):
             print(i)
-        print(categories)
+#        print(categories)
 
         # return render(request, 'index.html', {
         #     "categories": categories,
