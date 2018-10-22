@@ -5,7 +5,7 @@
 import xadmin
 
 from .models import Course, ChoiceQuestion, Video, Lesson, Faq, ChoiceBank, ProgramQuestion, ProgramUpload
-from .models import CourseCategory, CourseDirection, ProgramBank
+from .models import CourseCategory, CourseDirection, ProgramBank, KnowledgePoint
 
 # xadmin.site.register(CourseDirection)
 xadmin.site.register(CourseCategory)
@@ -18,3 +18,4 @@ xadmin.site.register(ProgramQuestion)
 xadmin.site.register(ProgramBank)
 xadmin.site.register(ProgramUpload)
 xadmin.site.register(Faq)
+xadmin.site.register(KnowledgePoint)
