@@ -6,8 +6,9 @@
             <h2>{{ lesson.name }}</h2>
             <span class="breadcrumbs">
                 <a href="{% url 'index' %}"><i class="fa fa-home home_1"></i></a> /
-                <a href="{% url 'course:course_list' %}" class="course-list"><span >课程列表</span></a> /
-                <a href="{% url 'course:course_level' course.id %}" class="course-list" ><span>{{ course.name }}</span></a> /
+                <a href="{% url 'course:course_list' %}" class="course-list"><span>课程列表</span></a> /
+                <a href="{% url 'course:course_level' course.id %}"
+                   class="course-list"><span>{{ course.name }}</span></a> /
                 <span style="color: #56CFCA;">{{ lesson.name }}</span>
             </span>
 
@@ -17,7 +18,7 @@
         <div class="container">
             <div class="col-md-3 forum">
                 <div>
-{#                    <img src="{{ MEDIA_URL }}{{ course.image }}" alt="" style="width: 230px;">#}
+                    {#                    <img src="{{ MEDIA_URL }}{{ course.image }}" alt="" style="width: 230px;">#}
                     <h3 style="color: cyan;text-align: center;">学习目标</h3>
                     <br>
                     <h4 style="color: white;">{{ lesson.learn_target }}</h4>
@@ -82,6 +83,7 @@
                         </div>
                     </div>
 
+
                 </div>
 
                 <div class="icons_box1">
@@ -131,7 +133,8 @@
                             扩展资料下载
 
                             <span style="position: absolute;right: 40px;">
-                                <a href="" data-toggle="modal" data-target="#extendDownload" style="text-decoration: none;color: #ffffff">
+                                <a href="" data-toggle="modal" data-target="#extendDownload"
+                                   style="text-decoration: none;color: #ffffff">
                                     <i class="fa fa-arrow-circle-o-down fa-lg"></i>
                                 </a>
                             </span>
@@ -169,9 +172,9 @@
                                     </div>
                                     <div class="section">
                                         <div><input type="button"
-                                                                                                   id="download_url"
-                                                                                                   value="下载链接"
-                                                                                                   class="btn btn-warning">
+                                                    id="download_url"
+                                                    value="下载链接"
+                                                    class="btn btn-warning">
                                         </div>
                                     </div>
                                     <div class="section no-intergral">
@@ -265,21 +268,125 @@
                         </div>
                     </div>
                 {% endif %}
-                <h3 style="text-align: center;position: relative; top: 50px;">常见问题</h3>
-                <dl class="faq-list">
 
-                    {% for faq in faqs %}
-                    <dt class="faq-list_h">
-                        <h4 class="marker">Q:</h4>
-                        <h5 class="marker_head">{{ faq.question }}</h5>
-                    </dt>
-                    <dd>
-                        <h4 class="marker1">A.</h4>
-                        <p class="m_13">{{ faq.answer }}</p>
-                    </dd>
-                     {% endfor %}
+                <div class="jb-accordion-wrapper wrapper_2">
+                    <div class="jb-accordion-title"> 本章随堂项目
+                        <button type="button" class="jb-accordion-button collapsed" data-toggle="collapse"
+                                data-target="#accordion6-"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <p><!-- /.accordion-title -->
+                    </p>
+                    <div id="accordion6-" class="jb-accordion-content collapse in" style="height: auto;">
+                        <div class="list-group">
+                            {% for lesson_project in lesson_projects %}
+                                <a href="{% url 'project:project_result' lesson_project.id %}" class="list-group-item"
+                                   style="color: black;">{{ lesson_project.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p><!-- /.collapse --></p>
+                </div>
 
-                </dl>
+                <div class="jb-accordion-wrapper wrapper_2">
+                    <div class="jb-accordion-title"> 本章QA
+                        <button type="button" class="jb-accordion-button collapsed" data-toggle="collapse"
+                                data-target="#accordion3-"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <p><!-- /.accordion-title -->
+                    </p>
+                    <div id="accordion3-" class="jb-accordion-content collapse in" style="height: auto;">
+                        <div class="list-group">
+                            {% for faq in faqs %}
+                                <a href="" class="list-group-item" data-toggle="modal" data-target="#answer"
+                                   style="color: black;">Q:{{ faq.question }}</a>
+
+                                <div class="modal fade" id="answer" tabindex="-1" role="dialog"
+                                     aria-labelledby="applyModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog_2">
+                                        <div class="modal-content" style="width: 450px;">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span
+                                                        aria-hidden="true">×</span></button>
+                                                <h5 class="modal-title" id="myModalLabel">
+                                                    <div class="head_4">
+                                                        <p>QA答案</p>
+                                                    </div>
+                                                </h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="section">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h4>
+                                                                <span style="">{{ faq.answer }}</span>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p><!-- /.collapse --></p>
+                </div>
+
+                <div class="jb-accordion-wrapper wrapper_2">
+                    <div class="jb-accordion-title"> 本章知识点小结
+                        <button type="button" class="jb-accordion-button collapsed" data-toggle="collapse"
+                                data-target="#accordion5-"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <p><!-- /.accordion-title -->
+                    </p>
+                    <div id="accordion5-" class="jb-accordion-content collapse in" style="height: auto;">
+                        <div class="list-group">
+                            {% for point in knowledge_points %}
+                                <a href="" class="list-group-item" data-toggle="modal" data-target="#point"
+                                   style="color: black;">{{ point.content_question }}</a>
+
+                                <div class="modal fade" id="point" tabindex="-1" role="dialog"
+                                     aria-labelledby="applyModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog_2">
+                                        <div class="modal-content" style="width: 450px;">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span
+                                                        aria-hidden="true">×</span></button>
+                                                <h5 class="modal-title" id="myModalLabel">
+                                                    <div class="head_4">
+                                                        <p>知识点详情</p>
+                                                    </div>
+                                                </h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="section">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h5>
+                                                                掌握程度：<span
+                                                                    style="">{{ point.get_master_require_display }}</span>
+                                                            </h5>
+                                                            <h4>
+                                                                请参考<span style="">{{ point.content_answer }}</span>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p><!-- /.collapse --></p>
+                </div>
+
             </div>
             <div class="clearfix"></div>
         </div>
@@ -329,7 +436,7 @@
                     type: "POST",
                     url: "{% url 'course:download_url' %}",
                     data: {
-                        'type':"extend_download",
+                        'type': "extend_download",
                         'course_id': {{ course.id }},
                         'lesson_id': {{ lesson.id }}
                     },
@@ -340,10 +447,10 @@
                     success: function (data) {
                         if (data.status == 'success') {
                             window.location.href = data.re_url;
-                        }else if (data.status == 'fail') {
+                        } else if (data.status == 'fail') {
                             $('.no-intergral').html('<div>\n' +
-                                '                                            <span style="color: red;">您的积分不足，请充值！</span>\n' +
-                                '                                        </div>');
+                                    '                                            <span style="color: red;">您的积分不足，请充值！</span>\n' +
+                                    '                                        </div>');
                         }
                     }
                 })

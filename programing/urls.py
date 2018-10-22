@@ -62,4 +62,7 @@ urlpatterns = [
     url(r'^alipay/return/', AlipayView.as_view(), name="alipay"),
 
     url(r'^recharge/', RechargeView.as_view(), name="recharge"),
+
+    #用户管理系统
+    url(r'^user_admin666/', include('user_admin.urls', namespace="user_admin")),
 ]

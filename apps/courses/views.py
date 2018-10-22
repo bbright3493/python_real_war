@@ -9,7 +9,7 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from utils.mixin_utils import LoginRequiredMixin
 from .models import Course, Lesson, ChoiceQuestion, Video, ProgramQuestion, ChoiceBank, ProgramUpload, CourseCategory, \
     Faq
-from .models import CourseDirection
+from .models import CourseDirection, KnowledgePoint
 from article.models import Article
 from operation.models import UserCourse, UserPass, UserErrorChoice
 from integral.models import UserIntergral, IntergralDemand
@@ -179,6 +179,8 @@ class CourseDetailView(View):
         choice_bank = lesson.get_choice_bank()
         program_bank = lesson.get_program_bank()
         faqs = Faq.objects.filter(lesson=lesson)
+        knowledge_points = KnowledgePoint.objects.filter(lesson=lesson)
+        lesson_projects = ProjectShow.objects.filter(lesson=lesson)
         return render(request, 'course_detail.html', locals())
 
 

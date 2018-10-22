@@ -67,6 +67,8 @@ class Course(models.Model):
 
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
+    integral = models.IntegerField(default=0, verbose_name="开通课程所需积分")
+
     class Meta:
         verbose_name = u"课程"
         verbose_name_plural = verbose_name
@@ -104,6 +106,8 @@ class Lesson(models.Model):
 #    program_detail = models.CharField(max_length=100, verbose_name="编程题描述", default="")
     # open_level = models.BooleanField(default=False, verbose_name="开通关卡")
     # pass_level = models.BooleanField(default=False, verbose_name="通过关卡")
+
+    integral = models.IntegerField(default=0, verbose_name="参与关卡所需积分")
 
     class Meta:
         verbose_name = u"课程关卡"
@@ -335,3 +339,25 @@ class ProgramResultImg(models.Model):
 
     # def __unicode__(self):
     #     return
+
+
+class KnowledgePoint(models.Model):
+    """
+    章节知识点
+    """
+    lesson = models.ForeignKey(Lesson, verbose_name=u"所属课程关卡", default="")
+    content_question = models.CharField(max_length=1000, verbose_name="知识点内容")
+    master_degree = (
+        (1, "了解"),
+        (2, "熟练使用"),
+        (3, "理解并熟练使用"),
+    )
+    master_require = models.SmallIntegerField(choices=master_degree, verbose_name=u'掌握要求', default=1)
+    content_answer = models.CharField(max_length=1000, verbose_name="知识点出处")
+
+    class Meta:
+        verbose_name = u'章节知识点总结'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return "%s-%s"%(self.lesson.name, self.content_question)

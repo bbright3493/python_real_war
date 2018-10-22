@@ -1,0 +1,141 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户管理系统</title>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <script>
+
+        $(function () {
+            //  点击搜索
+            $("#submit").on("click", function () {
+
+                var name = $("#name").val()
+                alert(name)
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'user_admin:user_query' %}",
+                    data: {
+                        'name': name,
+                    },
+                    async: true,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            alert(data.integral)
+                            $("#integral").text("该同学积分：" + data.integral)
+
+                        }
+                        else {
+
+                        }
+                    }
+                })
+            });
+
+            $("#add").on("click", function () {
+
+                var number = $("#number").val()
+                var name = $("#name").val()
+                alert(number)
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'user_admin:user_query' %}",
+                    data: {
+                        'number': number,
+                        'name': name,
+                    },
+                    async: true,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            alert("成功增加积分")
+                            $("#integral").text("该同学积分：" + data.integral)
+                        }
+                        else {
+
+                        }
+                    }
+                })
+            });
+
+
+            $("#course").on("click", function () {
+
+                var course = $("#selcet_course").val()
+                var name = $("#name").val()
+                alert(course)
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'user_admin:user_query' %}",
+                    data: {
+                        'course': course,
+                        'name': name,
+                    },
+                    async: true,
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            alert("成功开通课程")
+                        }
+                        else {
+                            alert("已经开通该课程")
+                        }
+                    }
+                })
+            });
+
+        })
+
+    </script>
+</head>
+<body>
+
+
+<p>使用方法</p>
+<br>
+<p>1 输入用户名点击提交</p>
+<br>
+<p>2 搜索到用户信息 开通课程权限 或者调整用户积分</p>
+<br>
+请输入用户名<br>
+<input id="name" type="text" name="name" value="bb">
+<br>
+<input id="submit" type="button" value="搜索">
+<br>
+<p id="integral"></p>
+输入增加的积分数<br>
+<input id="number" type="text" value=0>
+<br>
+<input id="add" type="button" value="增加积分">
+<br>
+
+<select id="selcet_course">
+    {% for course in courses %}
+    <option value="{{ course.id }}">{{ course.name }}</option>
+    {% endfor %}
+</select>
+
+<br>
+<input id="course" type="button" value="开通课程">
+<br>
+
+
+</body>
+</html>

@@ -5,7 +5,7 @@ from datetime import datetime
 
 from django.db import models
 
-from courses.models import CourseCategory, Course
+from courses.models import CourseCategory, Course, Lesson
 from users.models import UserProfile
 
 # Create your models here.
@@ -17,13 +17,25 @@ class ProjectShow(models.Model):
     """
     coursecategory = models.ForeignKey(CourseCategory, verbose_name="分类")
     name = models.CharField(max_length=36, verbose_name="项目名称")
-    user = models.ForeignKey(UserProfile, verbose_name="作者")
+#    user = models.ForeignKey(UserProfile, verbose_name="作者")
     degree_choices = (
         ("cj", "初级"),
         ("zj", "中级"),
         ("gj", "高级")
     )
     degree = models.CharField(verbose_name=u"难度", choices=degree_choices, max_length=2, default="")
+
+    type = (
+        (1, "随堂项目"),
+        (2, "综合项目"),
+        (3, "趣味项目"),
+        (4, "商业项目"),
+    )
+
+    project_type = models.SmallIntegerField(choices=type, verbose_name=u'项目类型', default=1)
+    #该字段只有随堂项目才有 某些配套课程的综合项目也有
+    lesson = models.ForeignKey(Lesson, verbose_name="项目对应关卡", null=True, blank=True,default='')
+
     image = models.ImageField(upload_to="project/show/images/%Y/%m" ,max_length=128, verbose_name="项目图片")
     describe = models.CharField(max_length=128, verbose_name="项目描述")
     url = models.URLField(verbose_name="项目演示视频链接")
